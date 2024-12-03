@@ -8,6 +8,7 @@ sys.path.append(str(project_root))
 
 from utils.display_results import display_result
 
+DAY = 1
 class DayOneSolution2024:
   input = 'input.txt'
   test_input = 'test_input.txt'
@@ -34,4 +35,4 @@ if __name__ == '__main__':
 
   solution = DayOneSolution2024(test=test)
   result = solution.p1() if args.part == 1 else solution.p2()
-  display_result(1, 1, result)
+  display_result(DAY, args.part, result)

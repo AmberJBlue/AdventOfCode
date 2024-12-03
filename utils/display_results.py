@@ -21,7 +21,7 @@ def display_result(day, part, result):
     holiday_messages = [
         "🎁 Unwrapping the result for you!",
         "✨ It's a Christmas miracle!",
-        "🎄 Ho Ho Ho! Here's your festive result!",
+        "🎅 Ho Ho Ho! Here's your result!",
         "🕯️ Lighting the way to your answer!",
         "❄️ A frosty result, fresh from the North Pole!",
         "🎅 Santa approves this result!",
