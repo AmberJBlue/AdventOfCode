@@ -22,7 +22,7 @@ The repository is organized as follows:
 ├── day1/
 │   ├── solution.py
 │   ├── test_input.txt
-│   └── d1_2024.md
+│   └── README.md
 ├── day2/
 │   ├── part1.py
 │   ├── part2.py
