@@ -1,7 +1,3 @@
-Here’s the updated README to include instructions for using the `part` and `test` flags when running the solution files:
-
----
-
 # Advent of Code Solutions 🎄
 
 Welcome to my **Advent of Code 2024** solutions repository! This repository contains my solutions for the coding challenges from [Advent of Code](https://adventofcode.com/2024), a series of fun and challenging programming puzzles released daily in December.
@@ -74,14 +70,6 @@ The repository is organized as follows:
      ```bash
      python solution.py --part 2 --test
      ```
-
----
-
-## 📝 Notes
-- **Flags:** The `--part` flag selects which part of the puzzle to solve (`1` or `2`), and the `--test` flag uses the `test_input.txt` file instead of the default `input.txt`.
-- Each solution is tailored to my personal puzzle input. You can use the same scripts with your own input by replacing the `input.txt` file.
-- My solutions may not always be optimal but are designed to emphasize readability and clarity.
-
 ---
 
 ## 🎄 Join the Fun!
