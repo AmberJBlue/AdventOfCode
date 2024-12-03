@@ -21,11 +21,10 @@ The repository is organized as follows:
 /2024
 ├── day1/
 │   ├── solution.py
-│   ├── test_input.txt
+│   ├── input.txt
 │   └── README.md
 ├── day2/
-│   ├── part1.py
-│   ├── part2.py
+│   ├── solution.py
 │   ├── input.txt
 │   └── README.md
 ...
@@ -33,7 +32,7 @@ The repository is organized as follows:
 
 - Each day has its own directory containing:
   - **`solution.py`:** My solutions for each part of the puzzle.
-  - **`test_input.txt`:** The puzzle input specific to my account.
+  - **`input.txt`:** The puzzle input specific to my account.
   - **`README.md`:** A description of the puzzle, solution explanation, and example walkthroughs.
 
 ---
