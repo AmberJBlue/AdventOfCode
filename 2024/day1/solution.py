@@ -27,9 +27,9 @@ class DayOneSolution2024:
     return sum(num * right_counts[num] for num in self.left_list)
   
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser('Solution file')
-  parser.add_argument('-part', required=False, default=1, type=int, help='Part (1/2)')
-  parser.add_argument('-test', required=False, default="False", type=str, help='Test mode (True/False)')
+  parser = argparse.ArgumentParser('Day 1 Solution')
+  parser.add_argument('-part', required=False, default=1, type=int, help='Part (1|2)')
+  parser.add_argument('-test', required=False, default="False", type=str, help='Test? (True|False)')
   args = parser.parse_args()
   test = True if args.test in ['True','true'] else False
 
