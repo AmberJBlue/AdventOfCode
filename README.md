@@ -5,9 +5,11 @@ Welcome to my **Advent of Code 2024** solutions repository! This repository cont
 ---
 
 ## 📜 About Advent of Code
-**Advent of Code (AoC)** is an annual event where programmers worldwide participate in solving creative puzzles that blend storytelling, logic, and programming. Each day from December 1st to 25th, a new two-part puzzle is unlocked at midnight EST. 
+
+**Advent of Code (AoC)** is an annual event where programmers worldwide participate in solving creative puzzles that blend storytelling, logic, and programming. Each day from December 1st to 25th, a new two-part puzzle is unlocked at midnight EST.
 
 These puzzles are designed to be:
+
 - **Challenging:** A great way to hone your algorithmic and problem-solving skills.
 - **Fun:** Each puzzle is wrapped in a festive holiday-themed story.
 - **Accessible:** Suitable for beginners and experts alike, with increasing difficulty as the event progresses.
@@ -15,6 +17,7 @@ These puzzles are designed to be:
 ---
 
 ## 📂 Repository Structure
+
 The repository is organized as follows:
 
 ```plaintext
@@ -44,6 +47,7 @@ The repository is organized as follows:
 ---
 
 ## 💻 How to Run
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/AmberJBlue/AdventOfCode
@@ -70,25 +74,21 @@ The repository is organized as follows:
      ```bash
      python solution.py --part 2 --test
      ```
+
 ---
 
+## Fun Features & Easter Eggs
+
+### ❄️ Let It Snow!
+
+Activate a snowfall animation in the terminal with the `--snow` flag. You can also specify how long the snow lasts (in seconds):
+
+```bash
+python solution.py --snow 10
+```
+
 ## 🎄 Join the Fun!
+
 If you're interested in participating in **Advent of Code**, you can sign up for free at [adventofcode.com](https://adventofcode.com/2024). Whether you’re a seasoned programmer or just starting out, it’s a fantastic way to learn and grow.
 
 Happy Coding and Happy Holidays! 🎅✨
-
----
-
-### Example Command Outputs:
-- **Default:**  
-  ```plaintext
-  🎁 Unwrapping the result for you!
-  🎄🎄🎄 Day 1, Part 1: 1506483 🎄🎄🎄
-  Merry Christmas and Happy Coding!
-  ```
-- **Testing Part 2:**  
-  ```plaintext
-  🌟 Shining bright, here's the result!
-  🎄🎄🎄 Day 1, Part 2: 123456 🎄🎄🎄
-  Merry Christmas and Happy Coding!
-  ```
