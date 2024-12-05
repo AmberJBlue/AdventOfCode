@@ -3,6 +3,8 @@ import argparse
 from itertools import product
 
 from pathlib import Path
+from collections import defaultdict, deque
+
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
@@ -32,9 +34,9 @@ class DayFiveSolution2024:
 
         for line in lines:
             if "|" in line:
-                rules.append(line)  # Add rules
+                rules.append(line)
             elif "," in line:
-                updates.append(list(map(int, line.split(","))))  # Parse updates
+                updates.append(list(map(int, line.split(","))))
 
         return rules, updates
 
@@ -58,18 +60,37 @@ class DayFiveSolution2024:
 
         return True
 
+    def _correct_update(self, update):
+        nodes = set(update)
+
+        page_rules = {node: set() for node in nodes}
+        for x in nodes:
+            for y in self.rule_graph.get(x, []):
+                if y in nodes:
+                    page_rules[y].add(x)
+
+        sorted_updates = sorted(update, key=lambda page: len(page_rules[page]))
+
+        return sorted_updates
+
     def p1(self):
         total = 0
 
         for update in self.updates:
             if self._update_validator(update):
-                print(update[len(update) // 2])
                 total += update[len(update) // 2]
 
         return total
 
     def p2(self):
-        return -1
+        total = 0
+
+        for update in self.updates:
+            if not self._update_validator(update):
+                corrected_update = self._correct_update(update)
+                total += corrected_update[len(corrected_update) // 2]
+
+        return total
 
 
 if __name__ == "__main__":
