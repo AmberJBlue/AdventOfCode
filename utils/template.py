@@ -22,10 +22,12 @@ class DayTEMPSolution2024:
         )
 
     def p1(self):
-        return -1
+        """Placeholder for Part 1 logic."""
+        return "Part 1 solution not implemented yet."
 
     def p2(self):
-        return -1
+        """Placeholder for Part 2 logic."""
+        return "Part 2 solution not implemented yet."
 
 
 if __name__ == "__main__":
