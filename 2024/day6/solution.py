@@ -1,12 +1,15 @@
 import sys
 import argparse
+import threading
+
 from pathlib import Path
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
 
 from utils.display_results import display_result
-from utils.animations import snowfall_animation
+from utils.animations import snowfall_animation, snowfall_progress
+
 
 DAY = 6
 
@@ -23,58 +26,117 @@ class DaySixSolution2024:
         self.rows = len(self.grid)
         self.cols = len(self.grid[0])
 
+        # Guard's initial position and direction
         self.guard_pos = None
         self.guard_dir = None
-        self.covered_areas = set()
         self.directions = {
             "^": (-1, 0),  # Up
             ">": (0, 1),  # Right
             "v": (1, 0),  # Down
             "<": (0, -1),  # Left
         }
-        self.turn_order = ["^", ">", "v", "<"]
+        self.turn_right = {"^": ">", ">": "v", "v": "<", "<": "^"}
 
         for i, row in enumerate(self.grid):
-            for j, char in enumerate(row):
-                if char in self.directions:
+            for j, cell in enumerate(row):
+                if cell in self.directions:
                     self.guard_pos = (i, j)
-                    self.guard_dir = char
+                    self.guard_dir = cell
 
     def is_in_bounds(self, x, y):
-        """Check if a position (x, y) is within the bounds of the grid."""
+        """Check if a position (x, y) is within grid bounds."""
         return 0 <= x < self.rows and 0 <= y < self.cols
 
-    def move_guard(self):
-        """Simulate one step of the guard's movement."""
-        x, y = self.guard_pos
-        dx, dy = self.directions[self.guard_dir]
-        next_x, next_y = x + dx, y + dy
+    def simulate_patrol(self, obstruction=None):
+        """
+        Simulate the guard's patrol.
 
-        if self.is_in_bounds(next_x, next_y) and self.grid[next_x][next_y] != "#":
-            self.guard_pos = (next_x, next_y)
-        else:
-            current_index = self.turn_order.index(self.guard_dir)
-            self.guard_dir = self.turn_order[(current_index + 1) % 4]
+        Parameters:
+            obstruction (tuple): Coordinates of an obstruction to add temporarily.
 
-        self.covered_areas.add(self.guard_pos)
+        Returns:
+            history (list): List of visited states (position + direction).
+            loop_detected (bool): True if the guard gets stuck in a loop.
+        """
+        if obstruction:
+            ox, oy = obstruction
+            self.grid[ox][oy] = "#"
 
-    def p1(self):
-        """Simulate the guard's patrol and count distinct visited positions."""
-        self.covered_areas.add(self.guard_pos)
+        current_pos = self.guard_pos
+        current_dir = self.guard_dir
+        visited_states = []
+        history = []
 
         while True:
-            x, y = self.guard_pos
-            dx, dy = self.directions[self.guard_dir]
-            next_x, next_y = x + dx, y + dy
-            if not self.is_in_bounds(next_x, next_y):
+            state = (current_pos[0], current_pos[1], current_dir)
+            if state in visited_states:
+                loop_detected = True
                 break
-            self.move_guard()
+            visited_states.append(state)
+            history.append(state)
 
-        return len(self.covered_areas)
+            dx, dy = self.directions[current_dir]
+            next_pos = (current_pos[0] + dx, current_pos[1] + dy)
+
+            if not self.is_in_bounds(*next_pos):
+                loop_detected = False
+                break
+            if self.grid[next_pos[0]][next_pos[1]] == "#":
+                current_dir = self.turn_right[current_dir]
+            else:
+                current_pos = next_pos
+
+        if obstruction:
+            self.grid[ox][oy] = "."
+
+        return history, loop_detected
+
+    def p1(self):
+        """
+        Count the number of distinct positions the guard visits during the patrol.
+        """
+        history, _ = self.simulate_patrol()
+        distinct_positions = {(x, y) for x, y, _ in history}
+        return len(distinct_positions)
 
     def p2(self):
-        """Placeholder for Part 2 logic."""
-        return "Part 2 solution not implemented yet."
+        """
+        Count the number of valid positions where an obstruction causes a loop.
+        """
+        stop_animation = threading.Event()
+        history, _ = self.simulate_patrol()
+        visited_positions = list({(x, y) for x, y, _ in history})
+        total_positions = len(visited_positions)
+        valid_obstructions = 0
+        progress = [0]
+
+        def compute_progress():
+            return progress[0], total_positions
+
+        animation_thread = threading.Thread(
+            target=snowfall_progress,
+            args=(20, 50),
+            kwargs={
+                "progress": compute_progress,
+                "context": "Simulating guard positions... ",
+                "show_fraction": True,
+            },
+            daemon=True,
+        )
+        animation_thread.start()
+
+        try:
+            for idx, (x, y) in enumerate(visited_positions):
+                _, is_loop = self.simulate_patrol(obstruction=(x, y))
+                if is_loop:
+                    valid_obstructions += 1
+
+                progress[0] = idx + 1
+
+            return valid_obstructions
+        finally:
+            stop_animation.set()
+            animation_thread.join()
 
 
 if __name__ == "__main__":

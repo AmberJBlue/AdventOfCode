@@ -174,3 +174,128 @@ The guard visits **41 distinct positions** before leaving the grid.
 ### 🎯 Your Challenge
 
 Predict the path of the guard and calculate how many distinct positions they visit before leaving the mapped area. Can you navigate the guard safely through history? 🎅✨
+
+---
+
+## Part II
+
+### 📜 Problem Description
+
+While The Historians begin working around the guard's patrol route, you decide to step outside the lab and use their time-traveling device to gather data. After recording the nightly status of the lab's guard post over several months, you return to The Historians with a new idea: to place a **single new obstruction** in the lab.
+
+This obstruction must be positioned to cause the guard to get stuck in a **loop**, ensuring the rest of the lab is safe to search. The obstruction cannot be placed at the guard's starting position, as the guard would immediately notice.
+
+Your task is to determine **how many different positions** could be used for the new obstruction while ensuring:
+
+1. The guard gets stuck in a loop.
+2. The obstruction placement avoids creating a time paradox.
+
+---
+
+### 🔍 Example Walkthrough
+
+Using the previous example map, there are **6 different positions** where a new obstruction would cause the guard to get stuck in a loop. Here are diagrams for these six positions, with:
+
+- `O` marking the obstruction,
+- `|` showing positions where the guard moves up/down,
+- `-` showing positions where the guard moves left/right,
+- `+` showing positions where the guard moves both up/down and left/right.
+
+#### Example Obstruction Positions:
+
+1. Place an obstruction next to the guard's starting position:
+   ```plaintext
+   ....#.....
+   ....+---+#
+   ....|...|.
+   ..#.|...|.
+   ....|..#|.
+   ....|...|.
+   .#.O^---+.
+   ........#.
+   #.........
+   ......#...
+   ```
+2. Place an obstruction in the bottom right quadrant:
+   ```plaintext
+   ....#.....
+   ....+---+#
+   ....|...|.
+   ..#.|...|.
+   ..+-+-+#|.
+   ..|.|.|.|.
+   .#+-^-+-+.
+   ......O.#.
+   #.........
+   ......#...
+   ```
+3. Place an obstruction next to the standing desk in the bottom right quadrant:
+   ```plaintext
+   ....#.....
+   ....+---+#
+   ....|...|.
+   ..#.|...|.
+   ..+-+-+#|.
+   ..|.|.|.|.
+   .#+-^-+-+.
+   .+----+O#.
+   #+----+...
+   ......#...
+   ```
+4. Place an obstruction near the bottom left corner:
+   ```plaintext
+   ....#.....
+   ....+---+#
+   ....|...|.
+   ..#.|...|.
+   ..+-+-+#|.
+   ..|.|.|.|.
+   .#+-^-+-+.
+   ..|...|.#.
+   #O+---+...
+   ......#...
+   ```
+5. Place an obstruction slightly to the right of the bottom left corner:
+   ```plaintext
+   ....#.....
+   ....+---+#
+   ....|...|.
+   ..#.|...|.
+   ..+-+-+#|.
+   ..|.|.|.|.
+   .#+-^-+-+.
+   ....|.|.#.
+   #..O+-+...
+   ......#...
+   ```
+6. Place an obstruction next to the tank of universal solvent:
+   ```plaintext
+   ....#.....
+   ....+---+#
+   ....|...|.
+   ..#.|...|.
+   ..+-+-+#|.
+   ..|.|.|.|.
+   .#+-^-+-+.
+   .+----++#.
+   #+----++..
+   ......#O..
+   ```
+
+---
+
+### 🔢 Output Format
+
+Output a single integer, representing the **number of possible obstruction positions** that will trap the guard in a loop.
+
+#### Example Output:
+
+```plaintext
+6
+```
+
+---
+
+### 🎯 Your Challenge
+
+Determine all the valid positions for a single new obstruction that traps the guard in a loop. How many options do you have? 🕵️‍♂️🎄
