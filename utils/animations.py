@@ -3,25 +3,6 @@ import os
 import random
 import threading
 
-import time
-import os
-import random
-import threading
-
-stop_animation = threading.Event()
-
-import time
-import os
-import random
-import threading
-
-stop_animation = threading.Event()
-
-import time
-import os
-import random
-import threading
-
 stop_animation = threading.Event()
 
 
