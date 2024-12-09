@@ -23,9 +23,7 @@ class DaySevenSolution2024:
         self.equations = self._parse_input(self.file)
 
     def _parse_input(self, file_content):
-        """
-        Parse the input into a list of (test_value, numbers) tuples.
-        """
+        """Parses the input into test values and associated numbers."""
         equations = []
         for line in file_content.splitlines():
             test_value, numbers = line.split(": ")
@@ -34,44 +32,51 @@ class DaySevenSolution2024:
             equations.append((test_value, numbers))
         return equations
 
-    def _evaluate_with_operators(self, numbers, operators):
+    def _evaluate_expression(self, numbers, operators):
         """
-        Evaluate the expression left-to-right with the given numbers and operators.
+        Evaluates the expression formed by inserting operators between numbers.
+        Evaluates left-to-right regardless of operator precedence.
         """
         result = numbers[0]
-        for i, operator in enumerate(operators):
-            if operator == "+":
-                result += numbers[i + 1]
-            elif operator == "*":
-                result *= numbers[i + 1]
+        for num, op in zip(numbers[1:], operators):
+            if op == "+":
+                result += num
+            elif op == "*":
+                result *= num
+            elif op == "||":
+                result = int(f"{result}{num}")  # Concatenation
         return result
 
     def _is_valid_equation(self, test_value, numbers):
         """
-        Check if any combination of operators can produce the test_value.
+        Checks if the test value can be formed by inserting any combination
+        of `+`, `*`, and `||` between the numbers.
         """
-        num_slots = len(numbers) - 1  # Number of operator slots
-        for operator_combination in product(["+", "*"], repeat=num_slots):
-            if (
-                self._evaluate_with_operators(numbers, operator_combination)
-                == test_value
-            ):
+        num_operators = len(numbers) - 1
+        for operators in product(["+", "*", "||"], repeat=num_operators):
+            if self._evaluate_expression(numbers, operators) == test_value:
                 return True
         return False
 
     def p1(self):
         """
-        Compute the total calibration result for valid equations.
+        Solve Part 1: Determine the total calibration result using only `+` and `*`.
         """
-        total_calibration_result = 0
+        total = 0
         for test_value, numbers in self.equations:
             if self._is_valid_equation(test_value, numbers):
-                total_calibration_result += test_value
-        return total_calibration_result
+                total += test_value
+        return total
 
     def p2(self):
-        """Placeholder for Part 2 logic."""
-        return "Part 2 solution not implemented yet."
+        """
+        Solve Part 2: Determine the total calibration result using `+`, `*`, and `||`.
+        """
+        total = 0
+        for test_value, numbers in self.equations:
+            if self._is_valid_equation(test_value, numbers):
+                total += test_value
+        return total
 
 
 if __name__ == "__main__":
