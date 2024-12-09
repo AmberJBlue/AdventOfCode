@@ -27,7 +27,7 @@ def snowfall_animation(rows=100, width=100, duration=10):
 
 
 def snowfall_progress(
-    rows=20, width=50, duration=None, progress=None, context="", show_fraction=False
+    rows=1000, width=1000, duration=None, progress=None, context="", show_fraction=False
 ):
     """
     Displays a snowfall animation in the terminal with an optional progress bar.
@@ -69,10 +69,13 @@ def snowfall_progress(
         progress_units = int((percent_complete / 100) * width)
         bar = "#" * progress_units + " " * (width - progress_units)
 
-        if show_fraction:
-            progress_text = f"[{completed}/{total}]"
+        if progress:
+            if show_fraction:
+                progress_text = f"[{completed}/{total}]"
+            else:
+                progress_text = f"{percent_complete:.2f}%"
         else:
-            progress_text = f"{percent_complete:.2f}%"
+            progress_text = ""
 
         if context:
             progress_text = context + progress_text

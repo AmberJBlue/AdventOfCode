@@ -61,7 +61,7 @@ class DaySevenSolution2024:
 
     def p1(self):
         """
-        Solve Part 1: Determine the total calibration result using only `+` and `*`.
+        Determine the total calibration result using only `+` and `*`.
         """
         total = 0
         for test_value, numbers in self.equations:
@@ -71,7 +71,7 @@ class DaySevenSolution2024:
 
     def p2(self):
         """
-        Solve Part 2: Determine the total calibration result using `+`, `*`, and `||`.
+        Determine the total calibration result using `+`, `*`, and `||`.
         """
         total = 0
         for test_value, numbers in self.equations:
